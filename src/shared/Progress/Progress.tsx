@@ -1,5 +1,24 @@
-import { Input } from "./Progress.style";
+import {
+  StepIcon,
+  StepItem,
+  StepWrapper,
+} from "./Progress.style";
 
-export const Step = () => {
-  return <Input type="range" min={1} max={3} step={1} />;
+interface IStep {
+  steps: number;
+  stepActive: number;
+}
+
+export const Step = (props: IStep) => {
+  const { steps = 3, stepActive } = props;
+  return (
+    <StepWrapper>
+      {new Array(steps).fill("").map((el, i) => (
+        <StepItem>
+          <StepIcon />
+          {i}
+        </StepItem>
+      ))}
+    </StepWrapper>
+  );
 };

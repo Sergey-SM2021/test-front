@@ -1,3 +1,15 @@
+import { useNavigate } from "react-router-dom";
+
 export const MainPage = () => {
-  return <div>MainPage</div>;
+  const nav = useNavigate()
+
+  const handlerStart = () => {
+    nav('/step/1')
+  }
+  
+  return (
+    <div>
+      <button onClick={handlerStart}>Начать</button>
+    </div>
+  );
 };

@@ -17,6 +17,15 @@ module.exports = () => {
             loader: "babel-loader",
           },
         },
+        {
+          test: /\.svg$/i,
+          issuer: /\.[jt]sx?$/,
+          use: ["@svgr/webpack"],
+        },
+        {
+          test: /\.css$/i,
+          use: ["style-loader", "css-loader"],
+        },
       ],
     },
     plugins: [
@@ -25,6 +34,10 @@ module.exports = () => {
     mode: "development",
     devServer: {
       port: 9000,
-    },  
+      open: true,
+    },
+    resolve: {
+      extensions: [".tsx", ".ts", ".js"],
+    },
   };
 };

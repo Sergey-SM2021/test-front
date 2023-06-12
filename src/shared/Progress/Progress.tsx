@@ -1,8 +1,4 @@
-import {
-  StepIcon,
-  StepItem,
-  StepWrapper,
-} from "./Progress.style";
+import { StepIcon, StepItem, StepWrapper } from "./Progress.style";
 
 interface IStep {
   steps: number;
@@ -14,8 +10,8 @@ export const Step = (props: IStep) => {
   return (
     <StepWrapper>
       {new Array(steps).fill("").map((el, i) => (
-        <StepItem>
-          <StepIcon />
+        <StepItem isActive={i <= stepActive}>
+          <StepIcon isActive={i <= stepActive} />
           {i}
         </StepItem>
       ))}

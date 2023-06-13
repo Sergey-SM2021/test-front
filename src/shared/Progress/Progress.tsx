@@ -1,4 +1,5 @@
 import { StepIcon, StepItem, StepWrapper } from "./Progress.style";
+import Icon from "./assets/Vector.svg";
 
 interface IStep {
   steps: number;
@@ -11,7 +12,9 @@ export const Step = (props: IStep) => {
     <StepWrapper>
       {new Array(steps).fill("").map((el, i) => (
         <StepItem isActive={i <= stepActive}>
-          <StepIcon isActive={i <= stepActive} />
+          <StepIcon isActive={i <= stepActive}>
+            {i <= stepActive ? <Icon /> : null}
+          </StepIcon>
           {i}
         </StepItem>
       ))}

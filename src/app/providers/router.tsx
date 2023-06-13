@@ -1,4 +1,4 @@
-import { MainPage } from "../../pages/MainPage";
+import { MainPage } from "../../pages/MainPage/ui/MainPage";
 import {
   createBrowserRouter,
   RouterProvider as BrowserRouterProvider,

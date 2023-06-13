@@ -1,8 +1,10 @@
-import { styled } from "styled-components";
+import { styled } from "styled-components"
 
 export const StepWrapper = styled.div`
   display: flex;
-`;
+  width: 100%;
+  background-color: aliceblue;
+`
 
 export const StepIcon = styled.div<{ isActive: boolean }>`
   background-color: ${({ isActive }) => (isActive ? "#5558fa" : "gray")};
@@ -14,7 +16,7 @@ export const StepIcon = styled.div<{ isActive: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
 
 export const StepItem = styled.div<{ isActive: boolean }>`
   width: 340px;
@@ -33,4 +35,4 @@ export const StepItem = styled.div<{ isActive: boolean }>`
     width: 100%;
     right: 50%;
   }
-`;
+`

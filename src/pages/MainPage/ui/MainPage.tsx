@@ -48,7 +48,7 @@ export const MainPage = () => {
 					<Input label="Номер телефона" placeholder="+7 999 999-99-99" />
 					<Input label="Email" placeholder="tim.jennings@example.com" />
 				</BodyFields>
-				<Button onClick={handlerStart} id="button-start">
+				<Button variant="solid" onClick={handlerStart} id="button-start">
           Начать
 				</Button>
 			</MainPageBody>

@@ -19,13 +19,20 @@ import { InputField } from "shared/ui/Input/Input.style"
 import { IUser } from "entity/user/type/user"
 import { setPrimaryInfo } from "entity/user/model/user"
 
+const links = [
+	{ name: "Telegram", id: "0" },
+	{ name: "Resume", id: "1" },
+	{ name: "Github", id: "2" },
+]
+
 export const MainPage = () => {
 	const dispatch = useAppDispatch()
 
 	const {
-		name,
 		primaryInfo: { mail, phone },
 	} = useAppSelector((state) => state.user)
+
+	const { name, surename } = useAppSelector((state) => state.user.personalData)
 
 	const { register, handleSubmit } = useForm<IUser["primaryInfo"]>({
 		defaultValues: { mail, phone },
@@ -37,12 +44,6 @@ export const MainPage = () => {
 		nav("/step/1")
 	}
 
-	const links = [
-		{ name: "Telegram", id: "0" },
-		{ name: "Resume", id: "1" },
-		{ name: "Github", id: "2" },
-	]
-
 	const onSubmit = (values: IUser["primaryInfo"]) => {
 		dispatch(setPrimaryInfo(values))
 	}
@@ -51,18 +52,18 @@ export const MainPage = () => {
 		<MainPageWrapper onSubmit={handleSubmit(onSubmit)}>
 			<MainPageHeader>
 				<HeaderAvatar>
-					{name
-						.split(" ")
-						.slice(0, 2)
-						.map((el) => el[0])}
+					{name.slice(0, 1)}
+					{surename.slice(0, 1)}
 				</HeaderAvatar>
 				<HeaderContent>
-					<HeaderName>{name}</HeaderName>
+					<HeaderName>
+						{name} {surename}
+					</HeaderName>
 					<HeaderLinks>
-						{links.map(({ id, name }) => (
-							<HeaderLink key={id}>
+						{links.map((el) => (
+							<HeaderLink key={el.id}>
 								<Folder />
-								{name}
+								{el.name}
 							</HeaderLink>
 						))}
 					</HeaderLinks>
@@ -77,11 +78,7 @@ export const MainPage = () => {
 						<InputField {...register("mail")} />
 					</Stack>
 				</BodyFields>
-				<Button
-					variant="solid"
-					onClick={handlerStart}
-					id="button-start"
-				>
+				<Button variant="solid" onClick={handlerStart} id="button-start">
           Начать
 				</Button>
 			</MainPageBody>

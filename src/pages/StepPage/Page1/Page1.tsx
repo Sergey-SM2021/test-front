@@ -1,43 +1,50 @@
 import { Controller, useForm } from "react-hook-form"
 import { Page1Wrapper } from "./Page1.style"
-import { Input } from "shared/ui/Input/Input"
 import { DropList } from "shared/ui/DropList/DropList"
-
-interface IForm {
-  nickname: string;
-  name: string;
-  surename: string;
-  sex: {
-    name: string;
-    id: string;
-  };
-}
+import { Flex } from "shared/ui/Flex/Flex"
+import { Button } from "shared/ui/Button/Button.style"
+import { useNavigate, useParams } from "react-router-dom"
+import { setPersonalData } from "entity/user/model/user"
+import { IUser } from "entity/user/type/user"
+import { useAppDispatch, useAppSelector } from "app/providers/redux"
+import { InputField } from "shared/ui/Input/Input.style"
 
 export const Page1 = () => {
-	const { register, handleSubmit, control } = useForm<IForm>()
+	const step = Number(useParams().step)
+	const { personalData } = useAppSelector((state) => state.user)
+	const dispatch = useAppDispatch()
 
-	const onSubmit = (data: IForm) => {
-		alert(JSON.stringify(data))
+	const nav = useNavigate()
+
+	const handlerNextStep = () => {
+		if (step <= 2) {
+			nav(`/step/${step + 1}`)
+		}
+	}
+
+	const handlerPrevStep = () => {
+		nav(-1)
+	}
+
+	const { register, handleSubmit, control } = useForm<IUser["personalData"]>({
+		defaultValues: personalData,
+	})
+
+	const onSubmit = (data: IUser["personalData"]) => {
+		dispatch(setPersonalData(data))
 	}
 
 	return (
 		<Page1Wrapper onSubmit={handleSubmit(onSubmit)}>
-			<Input
+			<InputField
 				placeholder="Nickname"
 				id="field-nickname"
-				label="Nickname"
 				{...register("nickname")}
 			/>
-			<Input
-				placeholder="Name"
-				id="field-name"
-				label="Name"
-				{...register("name")}
-			/>
-			<Input
+			<InputField placeholder="Name" id="field-name" {...register("name")} />
+			<InputField
 				placeholder="Surename"
 				id="field-surename"
-				label="Surename"
 				{...register("surename")}
 			/>
 			<Controller
@@ -50,10 +57,18 @@ export const Page1 = () => {
 							{ id: "field-name-sex-option-man", name: "man" },
 							{ id: "field-name-sex-option-woman", name: "woman" },
 						]}
-						value={field?.value?.name}
+						value={field?.value}
 					/>
 				)}
 			/>
+			<Flex spaceBeetwen>
+				<Button type="button" onClick={handlerPrevStep} variant="ghost">
+          Назад
+				</Button>
+				<Button onClick={handlerNextStep} variant="solid">
+          Вперёд
+				</Button>
+			</Flex>
 		</Page1Wrapper>
 	)
 }

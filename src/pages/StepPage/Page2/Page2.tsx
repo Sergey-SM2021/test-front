@@ -6,6 +6,9 @@ import AddIcon from "./assets/Vector.svg"
 import Remove from "./assets/remove.svg"
 import { Page2AdvantagesItem } from "./Page2.style"
 import { Stack } from "shared/ui/Stack/Stack.style"
+import { Flex } from "shared/ui/Flex/Flex"
+import { useNavigate, useParams } from "react-router-dom"
+import { useAppSelector } from "app/providers/redux"
 
 interface IForm {
   Advantages: { value: string; id: string }[];
@@ -14,6 +17,19 @@ interface IForm {
 }
 
 export const Page2 = () => {
+	const step = Number(useParams().step)
+
+	const nav = useNavigate()
+
+	const handlerNextStep = () => {
+		if (step <= 2) {
+			nav(`/step/${step + 1}`)
+		}
+	}
+
+	const handlerPrevStep = () => {
+		nav(-1)
+	}
 	const { register, handleSubmit, control } = useForm<IForm>({
 		defaultValues: {
 			Advantages: [{ id: "field-advantages-1", value: "" }],
@@ -112,6 +128,14 @@ export const Page2 = () => {
 					</ul>
 				</div>
 			</Stack>
+			<Flex spaceBeetwen>
+				<Button type="button" onClick={handlerPrevStep} variant="ghost">
+          Назад
+				</Button>
+				<Button onClick={handlerNextStep} variant="solid">
+          Вперёд
+				</Button>
+			</Flex>
 		</Page2Wrapper>
 	)
 }

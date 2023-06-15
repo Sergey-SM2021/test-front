@@ -9,18 +9,19 @@ import {
 
 interface IDropList {
   list: { name: string; id: string }[];
-  value: string | undefined;
+  value: { name: string; id: string };
   onChange: (value: { name: string; id: string }) => void;
 }
 
 export const DropList = ({ list, value, onChange }: IDropList) => {
+	console.log(list, value)
 	const [isOpen, setIsOpen] = useState(false)
 	const handlerOpen = () => {
 		setIsOpen((prev) => !prev)
 	}
 	return (
 		<DropListWrapper onClick={handlerOpen}>
-			{value ?? "Не выбрано"}
+			{value.name ?? "Не выбрано"}
 			<DropListArrowWrapper>
 				<Vector />
 			</DropListArrowWrapper>

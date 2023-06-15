@@ -5,15 +5,20 @@ const initialState: IUser = {
 	about: "",
 	Advantages: [],
 	CheckboxGroup: [],
-	name: "Кузнецов Сергей",
 
-	nickname: "",
 	RadioGroup: 9,
-	sex: sex.man,
-	surename: "",
 	primaryInfo: {
 		phone: "89168518338",
 		mail: "sergey2003.k.96@gmail.com",
+	},
+	personalData: {
+		name: "Сергей",
+		nickname: "",
+		sex: {
+			id: "field-sex-option-man",
+			name: sex.man,
+		},
+		surename: "Кузнецов",
 	},
 }
 
@@ -25,10 +30,14 @@ const userSlice = createSlice({
 			state.primaryInfo = paylod.payload
 			return state
 		},
+		setPersonalData(state, payload: PayloadAction<IUser["personalData"]>) {
+			state.personalData = payload.payload
+			return state
+		},
 	},
 })
 
 export const {
-	actions: { setPrimaryInfo },
+	actions: { setPrimaryInfo, setPersonalData },
 	reducer,
 } = userSlice

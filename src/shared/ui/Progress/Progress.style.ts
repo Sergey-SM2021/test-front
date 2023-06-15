@@ -3,7 +3,6 @@ import { styled } from "styled-components"
 export const StepWrapper = styled.div`
   display: flex;
   width: 100%;
-  background-color: aliceblue;
 `
 
 export const StepIcon = styled.div<{ isActive: boolean }>`

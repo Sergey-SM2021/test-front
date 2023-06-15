@@ -10,7 +10,6 @@ import { InputField } from "shared/ui/Input/Input.style"
 import { IUser } from "entity/user/type/user"
 import { useAppDispatch, useAppSelector } from "app/providers/redux"
 import { setSecondaryData } from "entity/user/model/user"
-import { DevTool } from "@hookform/devtools"
 
 export const Page2 = () => {
 	const { secondaryData } = useAppSelector((state) => state.user)
@@ -113,7 +112,6 @@ export const Page2 = () => {
 				</div>
 			</Stack>
 			<StepControll />
-			<DevTool control={control} />
 		</Page2Wrapper>
 	)
 }

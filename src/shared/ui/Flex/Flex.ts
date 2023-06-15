@@ -1,7 +1,18 @@
 import { styled } from "styled-components"
 
-export const Flex = styled.div<{ spaceBeetwen?: boolean }>`
+export const JustifyContentProvider = {
+	spaceBeetwen: "space-beetwen",
+	flexStart: "flex-start",
+}
+
+export const Flex = styled.div<{
+  justifyContent?: keyof typeof JustifyContentProvider;
+  vertical?: boolean;
+  gap?: number;
+}>`
+  gap: ${({ gap }) => `${gap}px`};
   display: flex;
-  justify-content: ${({ spaceBeetwen }) =>
-		spaceBeetwen ? "space-between" : "flex-start"};
+  justify-content: ${({ justifyContent }) =>
+		justifyContent && JustifyContentProvider[justifyContent]};
+  flex-direction: ${({ vertical }) => (vertical ? "column" : "row")};
 `

@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import { Button } from "shared/ui/Button/Button.style"
-import { Flex } from "shared/ui/Flex/Flex"
+import { Stack } from "shared/ui/Stack/Stack.style"
 
 export const StepControll = () => {
 	const step = Number(useLocation().pathname.split("").at(-1) as string)
@@ -17,13 +17,13 @@ export const StepControll = () => {
 	}
 
 	return (
-		<Flex spaceBeetwen>
+		<Stack justify="between">
 			<Button type="button" onClick={handlerPrevStep} variant="ghost">
         Назад
 			</Button>
 			<Button onClick={handlerNextStep} variant="solid">
         Вперёд
 			</Button>
-		</Flex>
+		</Stack>
 	)
 }

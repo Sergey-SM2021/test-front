@@ -1,14 +1,15 @@
-type fields = "about";
-
 export enum sex {
   man = "man",
   woman = "woman",
 }
 
-export interface IUser extends Record<fields, string> {
-  Advantages: string[];
-  CheckboxGroup: number[];
-  RadioGroup: number;
+type Advantage = {
+  value: string;
+  id: string;
+};
+
+export interface IUser {
+  about: string;
   primaryInfo: {
     phone: string;
     mail: string;
@@ -21,5 +22,10 @@ export interface IUser extends Record<fields, string> {
     };
     name: string;
     surename: string;
+  };
+  secondaryData: {
+    Advantages: Advantage[];
+    CheckboxGroup: string[];
+    Radio: string;
   };
 }

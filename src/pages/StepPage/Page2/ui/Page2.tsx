@@ -1,33 +1,30 @@
 import { useFieldArray, useForm } from "react-hook-form"
 import { Button } from "shared/ui/Button/Button.style"
-import { Page2Wrapper } from "./ui/Page2.style"
-import { Input } from "shared/ui/Input/Input"
-import AddIcon from "./assets/Vector.svg"
-import Remove from "./assets/remove.svg"
+import { Page2Wrapper } from "../ui/Page2.style"
+import AddIcon from "../assets/Vector.svg"
+import Remove from "../assets/remove.svg"
 import { Page2AdvantagesItem } from "./Page2.style"
 import { Stack } from "shared/ui/Stack/Stack.style"
 import { StepControll } from "widgets/stepControll"
-
-interface IForm {
-  Advantages: { value: string; id: string }[];
-  Checkbox: string;
-  Radio: string;
-}
+import { InputField } from "shared/ui/Input/Input.style"
+import { IUser } from "entity/user/type/user"
+import { useAppDispatch, useAppSelector } from "app/providers/redux"
+import { setSecondaryData } from "entity/user/model/user"
+import { DevTool } from "@hookform/devtools"
 
 export const Page2 = () => {
-	const { register, handleSubmit, control } = useForm<IForm>({
-		defaultValues: {
-			Advantages: [{ id: "field-advantages-1", value: "" }],
-		},
+	const { secondaryData } = useAppSelector((state) => state.user)
+	const { register, handleSubmit, control } = useForm<IUser["secondaryData"]>({
+		defaultValues: secondaryData,
 	})
-
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: "Advantages",
 	})
+	const dispatch = useAppDispatch()
 
-	const onSubmit = (value: IForm) => {
-		alert(value)
+	const onSubmit = (value: IUser["secondaryData"]) => {
+		dispatch(setSecondaryData(value))
 	}
 
 	const handlerAppend = () => {
@@ -56,7 +53,7 @@ export const Page2 = () => {
 					<Stack vertical>
 						{fields.map((el, i) => (
 							<Page2AdvantagesItem key={el.id}>
-								<Input id={el.id} {...register(`Advantages.${i}.value`)} />
+								<InputField id={el.id} {...register(`Advantages.${i}.value`)} />
 								<div onClick={() => handlerRemove(i)}>
 									<Remove />
 								</div>
@@ -81,8 +78,9 @@ export const Page2 = () => {
 							{CheckBoxes.map((el, i) => (
 								<Stack key={el.id}>
 									<input
-										name="Checkbox group"
+										{...register(`CheckboxGroup.${i}`)}
 										type="checkbox"
+										value={el.id}
 										id={`${el.id}${i + 1}`}
 									/>
 									<label htmlFor={`field-checkbox-group-option-${i + 1}`}>
@@ -100,8 +98,9 @@ export const Page2 = () => {
 							{RadioBoxes.map((el, i) => (
 								<Stack key={el.id}>
 									<input
+										{...register("Radio")}
 										type="radio"
-										name="Radio group"
+										value={`${el.id}${i + 1}`}
 										id={`${el.id}${i + 1}`}
 									/>
 									<label htmlFor={`field-checkbox-group-option-${i + 1}`}>
@@ -114,6 +113,7 @@ export const Page2 = () => {
 				</div>
 			</Stack>
 			<StepControll />
+			<DevTool control={control} />
 		</Page2Wrapper>
 	)
 }

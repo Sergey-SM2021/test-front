@@ -3,10 +3,6 @@ import { IUser, sex } from "../type/user"
 
 const initialState: IUser = {
 	about: "",
-	Advantages: [],
-	CheckboxGroup: [],
-
-	RadioGroup: 9,
 	primaryInfo: {
 		phone: "89168518338",
 		mail: "sergey2003.k.96@gmail.com",
@@ -19,6 +15,11 @@ const initialState: IUser = {
 			name: sex.man,
 		},
 		surename: "Кузнецов",
+	},
+	secondaryData: {
+		Advantages: [],
+		CheckboxGroup: [],
+		Radio: "",
 	},
 }
 
@@ -34,10 +35,14 @@ const userSlice = createSlice({
 			state.personalData = payload.payload
 			return state
 		},
+		setSecondaryData(state, payload: PayloadAction<IUser["secondaryData"]>) {
+			state.secondaryData = payload.payload
+			return state
+		},
 	},
 })
 
 export const {
-	actions: { setPrimaryInfo, setPersonalData },
+	actions: { setPrimaryInfo, setPersonalData, setSecondaryData },
 	reducer,
 } = userSlice

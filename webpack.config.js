@@ -38,7 +38,7 @@ module.exports = () => {
 			historyApiFallback: true,
 		},
 		resolve: {
-			modules: ["node_modules", "src"],
+			modules: ["node_modules", "./src"],
 			extensions: [".tsx", ".ts", ".js"],
 		},
 	}

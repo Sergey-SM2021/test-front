@@ -1,9 +1,9 @@
-import { Button } from "../../../shared/Button/Button.style"
-import { Container } from "../../../shared/Container/Container.style"
-import { Step } from "../../../shared/Progress/Progress"
+import { Button } from "shared/ui/Button/Button.style"
 import { StepPageWrapper } from "./Step.style"
 import { useNavigate, useParams } from "react-router-dom"
 import { StepForm } from "../StepForm/StepForm"
+import { Container } from "shared/ui/Container/Container.style"
+import { Step } from "shared/ui/Progress/Progress"
 
 export const StepPage = () => {
 	const step = Number(useParams().step)

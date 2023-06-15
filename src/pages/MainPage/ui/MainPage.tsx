@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { Button } from "../../../shared/Button/Button.style"
+import { Button } from "../../../shared/ui/Button/Button.style"
 import Folder from "../assets/Folder.svg"
 import {
 	BodyFields,
@@ -12,7 +12,7 @@ import {
 	MainPageHeader,
 	MainPageWrapper,
 } from "./MainPage.style"
-import { Input } from "../../../shared/Input/Input"
+import { Input } from "shared/ui/Input/Input"
 
 export const MainPage = () => {
 	const nav = useNavigate()

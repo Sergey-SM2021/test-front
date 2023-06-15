@@ -1,16 +1,22 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { PropsWithChildren } from "react";
-import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit"
+import { reducer as userReducer } from "entity/user/model/user"
+import { PropsWithChildren } from "react"
+import { Provider, TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 
 export const store = configureStore({
-  reducer: {},
-});
+	reducer: {
+		user: userReducer,
+	},
+})
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-interface IReduxProvider extends PropsWithChildren {}
+type IReduxProvider = PropsWithChildren;
 
 export const ReduxProvider = ({ children }: IReduxProvider) => {
-  return <Provider store={store}>{children}</Provider>;
-};
+	return <Provider store={store}>{children}</Provider>
+}
+
+export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

@@ -12,9 +12,25 @@ import {
 	MainPageHeader,
 	MainPageWrapper,
 } from "./MainPage.style"
-import { Input } from "shared/ui/Input/Input"
+import { useAppDispatch, useAppSelector } from "app/providers/redux"
+import { useForm } from "react-hook-form"
+import { Stack } from "shared/ui/Stack/Stack.style"
+import { InputField } from "shared/ui/Input/Input.style"
+import { IUser } from "entity/user/type/user"
+import { setPrimaryInfo } from "entity/user/model/user"
 
 export const MainPage = () => {
+	const dispatch = useAppDispatch()
+
+	const {
+		name,
+		primaryInfo: { mail, phone },
+	} = useAppSelector((state) => state.user)
+
+	const { register, handleSubmit } = useForm<IUser["primaryInfo"]>({
+		defaultValues: { mail, phone },
+	})
+
 	const nav = useNavigate()
 
 	const handlerStart = () => {
@@ -27,12 +43,21 @@ export const MainPage = () => {
 		{ name: "Github", id: "2" },
 	]
 
+	const onSubmit = (values: IUser["primaryInfo"]) => {
+		dispatch(setPrimaryInfo(values))
+	}
+
 	return (
-		<MainPageWrapper>
+		<MainPageWrapper onSubmit={handleSubmit(onSubmit)}>
 			<MainPageHeader>
-				<HeaderAvatar>АИ</HeaderAvatar>
+				<HeaderAvatar>
+					{name
+						.split(" ")
+						.slice(0, 2)
+						.map((el) => el[0])}
+				</HeaderAvatar>
 				<HeaderContent>
-					<HeaderName>Иван Иванов</HeaderName>
+					<HeaderName>{name}</HeaderName>
 					<HeaderLinks>
 						{links.map(({ id, name }) => (
 							<HeaderLink key={id}>
@@ -45,10 +70,18 @@ export const MainPage = () => {
 			</MainPageHeader>
 			<MainPageBody>
 				<BodyFields>
-					<Input label="Номер телефона" placeholder="+7 999 999-99-99" />
-					<Input label="Email" placeholder="tim.jennings@example.com" />
+					<Stack vertical>
+						<InputField {...register("phone")} />
+					</Stack>
+					<Stack vertical>
+						<InputField {...register("mail")} />
+					</Stack>
 				</BodyFields>
-				<Button variant="solid" onClick={handlerStart} id="button-start">
+				<Button
+					variant="solid"
+					onClick={handlerStart}
+					id="button-start"
+				>
           Начать
 				</Button>
 			</MainPageBody>

@@ -1,6 +1,6 @@
 import { styled } from "styled-components"
 
-export const MainPageWrapper = styled.div`
+export const MainPageWrapper = styled.form`
   padding: 24px;
 `
 

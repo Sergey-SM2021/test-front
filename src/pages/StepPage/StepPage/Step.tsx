@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { StepForm } from "../StepForm/StepForm"
 import { Container } from "shared/ui/Container/Container.style"
 import { Step } from "shared/ui/Progress/Progress"
+import { Flex } from "shared/ui/Flex/Flex"
 
 export const StepPage = () => {
 	const step = Number(useParams().step)
@@ -24,12 +25,14 @@ export const StepPage = () => {
 			<Container>
 				<Step steps={3} stepActive={step} />
 				<StepForm step={step} />
-				<Button onClick={handlerPrevStep} variant="ghost">
-          Назад
-				</Button>
-				<Button onClick={handlerNextStep} variant="solid">
-          Вперёд
-				</Button>
+				<Flex spaceBeetwen>
+					<Button onClick={handlerPrevStep} variant="ghost">
+            Назад
+					</Button>
+					<Button onClick={handlerNextStep} variant="solid">
+            Вперёд
+					</Button>
+				</Flex>
 			</Container>
 		</StepPageWrapper>
 	)

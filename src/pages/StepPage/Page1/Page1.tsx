@@ -1,30 +1,15 @@
 import { Controller, useForm } from "react-hook-form"
 import { Page1Wrapper } from "./Page1.style"
 import { DropList } from "shared/ui/DropList/DropList"
-import { Flex } from "shared/ui/Flex/Flex"
-import { Button } from "shared/ui/Button/Button.style"
-import { useNavigate, useParams } from "react-router-dom"
 import { setPersonalData } from "entity/user/model/user"
 import { IUser } from "entity/user/type/user"
 import { useAppDispatch, useAppSelector } from "app/providers/redux"
 import { InputField } from "shared/ui/Input/Input.style"
+import { StepControll } from "widgets/stepControll"
 
 export const Page1 = () => {
-	const step = Number(useParams().step)
 	const { personalData } = useAppSelector((state) => state.user)
 	const dispatch = useAppDispatch()
-
-	const nav = useNavigate()
-
-	const handlerNextStep = () => {
-		if (step <= 2) {
-			nav(`/step/${step + 1}`)
-		}
-	}
-
-	const handlerPrevStep = () => {
-		nav(-1)
-	}
 
 	const { register, handleSubmit, control } = useForm<IUser["personalData"]>({
 		defaultValues: personalData,
@@ -61,14 +46,7 @@ export const Page1 = () => {
 					/>
 				)}
 			/>
-			<Flex spaceBeetwen>
-				<Button type="button" onClick={handlerPrevStep} variant="ghost">
-          Назад
-				</Button>
-				<Button onClick={handlerNextStep} variant="solid">
-          Вперёд
-				</Button>
-			</Flex>
+			<StepControll />
 		</Page1Wrapper>
 	)
 }

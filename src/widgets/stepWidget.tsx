@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom"
-import { Step } from "shared/ui/Progress/Progress"
+import { Step } from "shared/ui/Progress/ui/Progress"
 
 export const ProgressBar = () => {
 	const step = useLocation().pathname.split("").at(-1) as string

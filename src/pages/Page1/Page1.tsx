@@ -1,7 +1,7 @@
 import { Controller, useForm } from "react-hook-form"
 import { Page1Inner, Page1Wrapper } from "./Page1.style"
 import { setPersonalData } from "entity/user/model/user"
-import { IUser } from "entity/user/type/user"
+import { IUser, sex } from "entity/user/type/user"
 import { useAppDispatch, useAppSelector } from "app/providers/redux"
 import { InputField } from "shared/ui/Input/Input.style"
 import { Stack } from "shared/ui/Stack/Stack.style"
@@ -60,8 +60,8 @@ export const Page1 = () => {
 								control={control}
 								render={({ field }) => (
 									<Select {...field}>
-										<OptionWrapper data-label="man">man</OptionWrapper>
-										<OptionWrapper data-label="woman">woman</OptionWrapper>
+										<OptionWrapper data-label={sex.man}>man</OptionWrapper>
+										<OptionWrapper data-label={sex.woman}>woman</OptionWrapper>
 									</Select>
 								)}
 							/>

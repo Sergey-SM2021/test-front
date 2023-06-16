@@ -1,17 +1,20 @@
 import { Stack } from "shared/ui/Stack/Stack.style"
 import { TextArea } from "shared/ui/TextArea.style"
 import { Page3Inner, Page3Wrapper } from "./Page3.style"
-import { StepControll } from "widgets/stepControll"
 import { useForm } from "react-hook-form"
 import { IUser } from "entity/user/type/user"
 import { useAppDispatch, useAppSelector } from "app/providers/redux"
 import { setAbout } from "entity/user/model/user"
+import { Back } from "widgets/back"
+import { Button } from "shared/ui/Button/Button.style"
+import { useStep } from "shared/hooks/useStep"
 
 interface IForm {
   about: IUser["about"];
 }
 
 export const Page3 = () => {
+	const { handlerPrev } = useStep()
 	const dispatch = useAppDispatch()
 	const { about } = useAppSelector((state) => state.user)
 	const { register, handleSubmit } = useForm<IForm>({
@@ -32,7 +35,12 @@ export const Page3 = () => {
 					<TextArea {...register("about")} />
 				</Stack>
 			</Page3Inner>
-			<StepControll />
+			<Stack justify="between">
+				<Button variant="ghost" type="button" onClick={handlerPrev}>
+          Назад
+				</Button>
+				<Button variant="solid">Готово</Button>
+			</Stack>
 		</Page3Wrapper>
 	)
 }

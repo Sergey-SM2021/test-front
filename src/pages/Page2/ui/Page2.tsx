@@ -9,21 +9,37 @@ import { InputField } from "shared/ui/Input/Input.style"
 import { IUser } from "entity/user/type/user"
 import { useAppDispatch, useAppSelector } from "app/providers/redux"
 import { setSecondaryData } from "entity/user/model/user"
-import { StepControll } from "widgets/stepControll"
+import { Back } from "widgets/back"
+import { useStep } from "shared/hooks/useStep"
+
+const CheckBoxes = new Array(3).fill({
+	id: "field-checkbox-group-option-",
+	value: "field-checkbox-group-option-",
+})
+
+const RadioBoxes = new Array(3).fill({
+	id: "field-checkbox-group-option-",
+	value: "field-checkbox-group-option-",
+})
 
 export const Page2 = () => {
 	const { secondaryData } = useAppSelector((state) => state.user)
 	const { register, handleSubmit, control } = useForm<IUser["secondaryData"]>({
 		defaultValues: secondaryData,
 	})
+
+	const { handlerNextStep, handlerPrev } = useStep()
+
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: "Advantages",
 	})
+
 	const dispatch = useAppDispatch()
 
 	const onSubmit = (value: IUser["secondaryData"]) => {
 		dispatch(setSecondaryData(value))
+		handlerNextStep()
 	}
 
 	const handlerAppend = () => {
@@ -33,16 +49,6 @@ export const Page2 = () => {
 	const handlerRemove = (index: number) => {
 		remove(index)
 	}
-
-	const CheckBoxes = new Array(3).fill({
-		id: "field-checkbox-group-option-",
-		value: "field-checkbox-group-option-",
-	})
-
-	const RadioBoxes = new Array(3).fill({
-		id: "field-checkbox-group-option-",
-		value: "field-checkbox-group-option-",
-	})
 
 	return (
 		<Page2Wrapper onSubmit={handleSubmit(onSubmit)}>
@@ -116,7 +122,10 @@ export const Page2 = () => {
 					</div>
 				</Stack>
 			</Page2Inner>
-			<StepControll />
+			<Stack justify="between">
+				<Button variant="ghost" type="button" onClick={handlerPrev}>Назад</Button>
+				<Button variant="solid">Вперёд</Button>
+			</Stack>
 		</Page2Wrapper>
 	)
 }

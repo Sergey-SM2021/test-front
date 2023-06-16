@@ -3,11 +3,6 @@ export enum sex {
   woman = "woman",
 }
 
-type Advantage = {
-  value: string;
-  id: string;
-};
-
 export interface IUser {
   about: string;
   primaryInfo: {
@@ -21,8 +16,8 @@ export interface IUser {
     surename: string;
   };
   secondaryData: {
-    Advantages: Advantage[];
-    CheckboxGroup: string[];
-    Radio: string;
+    advantages: string[];
+    checkbox: number[];
+    radio: number;
   };
 }

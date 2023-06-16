@@ -14,9 +14,9 @@ const initialState: IUser = {
 		surename: "Кузнецов",
 	},
 	secondaryData: {
-		Advantages: [],
-		CheckboxGroup: [],
-		Radio: "",
+		radio: 0,
+		advantages: [],
+		checkbox: [],
 	},
 }
 

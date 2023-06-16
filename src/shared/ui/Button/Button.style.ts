@@ -17,6 +17,8 @@ const Color = {
 
 interface IButton {
   variant: keyof typeof Variant;
+  h?: number;
+  w?: number;
 }
 
 export const Button = styled.button<IButton>`
@@ -25,6 +27,11 @@ export const Button = styled.button<IButton>`
   background-color: ${({ variant }) => Variant[variant]};
   border: ${({ variant }) => Border[variant]};
   border-radius: 4px;
+  height: ${({ h }) => `${h}px`};
+  width: ${({ w }) => `${w}px`};
+  justify-content: center;
+  align-items: center;
+  display: flex;
   &:hover {
     cursor: pointer;
   }

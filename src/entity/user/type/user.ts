@@ -16,10 +16,7 @@ export interface IUser {
   };
   personalData: {
     nickname: string;
-    sex: {
-      id: string;
-      name: sex;
-    };
+    sex: sex;
     name: string;
     surename: string;
   };

@@ -8,6 +8,7 @@ const spaceConfig = {
 const alignItemsConfig = {
 	stretch: "stretch",
 	start: "flex-start",
+	center: "center",
 }
 
 const justifyConfig = {

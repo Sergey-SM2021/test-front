@@ -10,10 +10,7 @@ const initialState: IUser = {
 	personalData: {
 		name: "Сергей",
 		nickname: "",
-		sex: {
-			id: "field-sex-option-man",
-			name: sex.man,
-		},
+		sex: sex.man,
 		surename: "Кузнецов",
 	},
 	secondaryData: {

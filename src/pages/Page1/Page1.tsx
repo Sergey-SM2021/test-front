@@ -1,12 +1,15 @@
 import { Controller, useForm } from "react-hook-form"
 import { Page1Inner, Page1Wrapper } from "./Page1.style"
-import { DropList } from "shared/ui/DropList/DropList"
 import { setPersonalData } from "entity/user/model/user"
 import { IUser } from "entity/user/type/user"
 import { useAppDispatch, useAppSelector } from "app/providers/redux"
 import { InputField } from "shared/ui/Input/Input.style"
 import { Stack } from "shared/ui/Stack/Stack.style"
 import { StepControll } from "widgets/stepControll"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { userSchema } from "./utils/validation"
+import { Select } from "shared/ui/Selcet/Select"
+import { OptionWrapper } from "shared/ui/Option/Option.style"
 
 export const Page1 = () => {
 	const { personalData } = useAppSelector((state) => state.user)
@@ -14,6 +17,7 @@ export const Page1 = () => {
 
 	const { register, handleSubmit, control } = useForm<IUser["personalData"]>({
 		defaultValues: personalData,
+		resolver: yupResolver(userSchema),
 	})
 
 	const onSubmit = (data: IUser["personalData"]) => {
@@ -55,14 +59,10 @@ export const Page1 = () => {
 								name="sex"
 								control={control}
 								render={({ field }) => (
-									<DropList
-										onChange={field.onChange}
-										list={[
-											{ id: "field-name-sex-option-man", name: "man" },
-											{ id: "field-name-sex-option-woman", name: "woman" },
-										]}
-										value={field?.value}
-									/>
+									<Select {...field}>
+										<OptionWrapper data-label="man">man</OptionWrapper>
+										<OptionWrapper data-label="woman">woman</OptionWrapper>
+									</Select>
 								)}
 							/>
 						</Stack>

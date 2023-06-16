@@ -18,6 +18,8 @@ import { Stack } from "shared/ui/Stack/Stack.style"
 import { InputField } from "shared/ui/Input/Input.style"
 import { IUser } from "entity/user/type/user"
 import { setPrimaryInfo } from "entity/user/model/user"
+import { useState } from "react"
+import Edit from "../assets/Edit.svg"
 
 const links = [
 	{ name: "Telegram", id: "0" },
@@ -26,6 +28,7 @@ const links = [
 ]
 
 export const MainPage = () => {
+	const [isDisabled, setIsDisabled] = useState<boolean>(true)
 	const dispatch = useAppDispatch()
 
 	const {
@@ -46,6 +49,10 @@ export const MainPage = () => {
 
 	const onSubmit = (values: IUser["primaryInfo"]) => {
 		dispatch(setPrimaryInfo(values))
+	}
+
+	const handlerEdit = () => {
+		setIsDisabled(false)
 	}
 
 	return (
@@ -72,10 +79,14 @@ export const MainPage = () => {
 			<MainPageBody>
 				<BodyFields>
 					<Stack vertical>
-						<InputField {...register("phone")} />
+						<InputField {...register("phone")} disabled={isDisabled} />
 					</Stack>
 					<Stack vertical>
-						<InputField {...register("mail")} />
+						<InputField {...register("mail")} disabled={isDisabled} />
+					</Stack>
+					<Stack align="center" onClick={handlerEdit}>
+						<Edit />
+						<p>Редактировать</p>
 					</Stack>
 				</BodyFields>
 				<Button variant="solid" onClick={handlerStart} id="button-start">

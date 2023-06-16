@@ -5,6 +5,7 @@ export const DropListWrapper = styled.div`
   position: relative;
   ${BaseStyle}
   height: 1em;
+  padding-right: 22px;
 `
 
 export const DropListArrowWrapper = styled.div`
@@ -30,4 +31,7 @@ export const DropListItem = styled.div`
   width: 100%;
   background-color: #fff;
   padding: 8px 12px;
+  &:hover {
+    cursor: pointer;
+  }
 `

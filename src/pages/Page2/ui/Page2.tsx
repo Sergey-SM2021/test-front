@@ -1,15 +1,15 @@
 import { useFieldArray, useForm } from "react-hook-form"
 import { Button } from "shared/ui/Button/Button.style"
-import { Page2Wrapper } from "../ui/Page2.style"
+import { Page2Inner, Page2Wrapper } from "../ui/Page2.style"
 import AddIcon from "../assets/Vector.svg"
 import Remove from "../assets/remove.svg"
 import { Page2AdvantagesItem } from "./Page2.style"
 import { Stack } from "shared/ui/Stack/Stack.style"
-import { StepControll } from "widgets/stepControll"
 import { InputField } from "shared/ui/Input/Input.style"
 import { IUser } from "entity/user/type/user"
 import { useAppDispatch, useAppSelector } from "app/providers/redux"
 import { setSecondaryData } from "entity/user/model/user"
+import { StepControll } from "widgets/stepControll"
 
 export const Page2 = () => {
 	const { secondaryData } = useAppSelector((state) => state.user)
@@ -46,71 +46,76 @@ export const Page2 = () => {
 
 	return (
 		<Page2Wrapper onSubmit={handleSubmit(onSubmit)}>
-			<Stack vertical space="md">
-				<Stack vertical>
-					<p>Advantages</p>
+			<Page2Inner>
+				<Stack vertical space="md">
 					<Stack vertical>
-						{fields.map((el, i) => (
-							<Page2AdvantagesItem key={el.id}>
-								<InputField id={el.id} {...register(`Advantages.${i}.value`)} />
-								<div onClick={() => handlerRemove(i)}>
-									<Remove />
-								</div>
-							</Page2AdvantagesItem>
-						))}
+						<p>Advantages</p>
+						<Stack vertical>
+							{fields.map((el, i) => (
+								<Page2AdvantagesItem key={el.id}>
+									<InputField
+										id={el.id}
+										{...register(`Advantages.${i}.value`)}
+									/>
+									<div onClick={() => handlerRemove(i)}>
+										<Remove />
+									</div>
+								</Page2AdvantagesItem>
+							))}
+						</Stack>
+						<span>
+							<Button
+								type="button"
+								variant="ghost"
+								onClick={handlerAppend}
+								id="button-add"
+							>
+								<AddIcon />
+							</Button>
+						</span>
 					</Stack>
-					<span>
-						<Button
-							type="button"
-							variant="ghost"
-							onClick={handlerAppend}
-							id="button-add"
-						>
-							<AddIcon />
-						</Button>
-					</span>
-				</Stack>
-				<div>
-					<p>Checkbox group</p>
-					<ul>
-						<li>
+					<div>
+						<p>Checkbox group</p>
+						<ul>
 							{CheckBoxes.map((el, i) => (
-								<Stack key={el.id}>
-									<input
-										{...register(`CheckboxGroup.${i}`)}
-										type="checkbox"
-										value={el.id}
-										id={`${el.id}${i + 1}`}
-									/>
-									<label htmlFor={`field-checkbox-group-option-${i + 1}`}>
-										{i + 1}
-									</label>
-								</Stack>
+								<li key={i}>
+									<Stack key={el.id}>
+										<input
+											{...register(`CheckboxGroup.${i}`)}
+											type="checkbox"
+											value={el.id}
+											id={`${el.id}${i + 1}`}
+										/>
+										<label htmlFor={`field-checkbox-group-option-${i + 1}`}>
+											{i + 1}
+										</label>
+									</Stack>
+								</li>
 							))}
-						</li>
-					</ul>
-				</div>
-				<div>
-					<p>Radio group</p>
-					<ul>
-						<li>
+						</ul>
+					</div>
+					<div>
+						<p>Radio group</p>
+						<ul>
 							{RadioBoxes.map((el, i) => (
-								<Stack key={el.id}>
-									<input
-										{...register("Radio")}
-										type="radio"
-										value={`${el.id}${i + 1}`}
-										id={`${el.id}${i + 1}`}
-									/>
-									<label htmlFor={`field-checkbox-group-option-${i + 1}`}>
-										{i + 1}
-									</label>
-								</Stack>
+								<li key={i}>
+									<Stack key={el.id}>
+										<input
+											{...register("Radio")}
+											type="radio"
+											value={`${el.id}${i + 1}`}
+											id={`${el.id}${i + 1}`}
+										/>
+										<label htmlFor={`field-checkbox-group-option-${i + 1}`}>
+											{i + 1}
+										</label>
+									</Stack>
+								</li>
 							))}
-						</li>
-					</ul>
-				</div>
-			</Stack>
+						</ul>
+					</div>
+				</Stack>
+			</Page2Inner>
 			<StepControll />
 		</Page2Wrapper>
 	)

@@ -14,7 +14,6 @@ interface IDropList {
 }
 
 export const DropList = ({ list, value, onChange }: IDropList) => {
-	console.log(list, value)
 	const [isOpen, setIsOpen] = useState(false)
 	const handlerOpen = () => {
 		setIsOpen((prev) => !prev)

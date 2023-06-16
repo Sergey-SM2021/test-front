@@ -18,7 +18,7 @@ export const StepIcon = styled.div<{ isActive: boolean }>`
 `
 
 export const StepItem = styled.div<{ isActive: boolean }>`
-  width: 340px;
+  width: calc(100% / 3);
   position: relative;
   display: flex;
   gap: 12px;

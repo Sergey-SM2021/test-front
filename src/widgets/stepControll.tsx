@@ -21,7 +21,7 @@ export const StepControll = () => {
 			<Button type="button" onClick={handlerPrevStep} variant="ghost">
         Назад
 			</Button>
-			<Button onClick={handlerNextStep} variant="solid">
+			<Button type="submit" onClick={handlerNextStep} variant="solid">
         Вперёд
 			</Button>
 		</Stack>

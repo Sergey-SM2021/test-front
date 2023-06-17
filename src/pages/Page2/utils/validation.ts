@@ -1,4 +1,4 @@
-import { array, number, object, string } from "yup"
+import { array, object, string } from "yup"
 
 export const validation = object({
 	advantages: array()
@@ -11,7 +11,7 @@ export const validation = object({
 		.required()
 		.test({ test: (array) => array?.length !== 0 }),
 	checkbox: array()
-		.of(number().required())
+		.of(string().required())
 		.test({ test: (array) => array?.length !== 0 }),
-	radio: number().required(),
+	radio: string().required(),
 })

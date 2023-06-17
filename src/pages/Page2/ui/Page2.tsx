@@ -6,7 +6,6 @@ import Remove from "../assets/remove.svg"
 import { Page2AdvantagesItem } from "./Page2.style"
 import { Stack } from "shared/ui/Stack/Stack.style"
 import { InputField } from "shared/ui/Input/Input.style"
-import { IUser } from "entity/user/type/user"
 import { useAppDispatch, useAppSelector } from "app/providers/redux"
 import { setSecondaryData } from "entity/user/model/user"
 import { useStep } from "shared/hooks/useStep"
@@ -24,9 +23,10 @@ const RadioBoxes = new Array(3).fill({
 	value: "field-checkbox-group-option-",
 })
 
-interface IForm extends Omit<IUser["secondaryData"], "advantages" | "radio"> {
+interface IForm {
   advantages: { value: string; id: string }[];
-  radio: number
+  radio: string;
+  checkbox: Array<string>;
 }
 
 export const Page2 = () => {
@@ -36,6 +36,8 @@ export const Page2 = () => {
 			value: el,
 			id: Math.random.toString(),
 		})),
+		radio: state.user.secondaryData.radio?.toString(),
+		checkbox: state.user.secondaryData.checkbox.map((el) => el.toString()),
 	}))
 
 	const {

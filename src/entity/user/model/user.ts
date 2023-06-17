@@ -35,7 +35,7 @@ const userSlice = createSlice({
 			state.secondaryData = payload.payload
 			return state
 		},
-		setAbout(state, payload: PayloadAction<IUser["about"]>) {
+		setAbout(state, payload: PayloadAction<string>) {
 			state.about = payload.payload
 			return state
 		},

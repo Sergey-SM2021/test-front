@@ -5,6 +5,7 @@ module.exports = () => {
 	return {
 		entry: resolve(__dirname, "src", "app", "index.tsx"),
 		output: {
+			publicPath: "/",
 			path: resolve(__dirname, "dist"),
 			filename: "[name].[contenthash].bundle.js",
 		},

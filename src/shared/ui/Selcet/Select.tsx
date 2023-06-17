@@ -1,10 +1,11 @@
 import Vector from "./assets/Vector.svg"
-import { useState, MouseEvent, PropsWithChildren } from "react"
+import { useState, MouseEvent, PropsWithChildren, useRef } from "react"
 import {
 	DropListArrowWrapper,
 	DropListList,
 	DropListWrapper,
 } from "./Select.style"
+import { useOutsideClick } from "shared/hooks/useOutsideClick"
 
 interface ISelect extends PropsWithChildren {
   onChange: (string: string) => void;
@@ -24,8 +25,12 @@ export const Select = (props: ISelect) => {
 		onChange((e.target as HTMLInputElement).dataset["label"] as string)
 	}
 
+	const ref = useRef(null)
+
+	useOutsideClick(ref, () => setIsOpen(false))
+
 	return (
-		<DropListWrapper onClick={handlerOpen}>
+		<DropListWrapper ref={ref} onClick={handlerOpen}>
 			{value ?? "Не выбрано"}
 			<DropListArrowWrapper>
 				<Vector />

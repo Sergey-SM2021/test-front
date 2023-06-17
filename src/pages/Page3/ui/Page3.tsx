@@ -17,6 +17,7 @@ import { validation } from "../utils/validation"
 import { ErrorText } from "shared/ui/ErrorText/ErrorText"
 import { Modal } from "feature/send/ui/Modal/Modal"
 import { sendData } from "feature/send/model/send"
+import { DevTool } from "@hookform/devtools"
 
 interface IForm {
   about: IUser["about"];
@@ -31,6 +32,7 @@ export const Page3 = () => {
 		register,
 		handleSubmit,
 		watch,
+		control,
 		formState: { errors },
 	} = useForm<IForm>({
 		defaultValues: {
@@ -42,8 +44,7 @@ export const Page3 = () => {
 	const aboutLength = watch("about").length
 
 	const onSubmit = async (data: IForm) => {
-		await dispatch(setAbout(data.about))
-		dispatch(sendData(user))
+		await dispatch(sendData({ ...user, about: data.about }))
 	}
 
 	return (
@@ -53,18 +54,26 @@ export const Page3 = () => {
 					<Stack vertical>
 						<p>About</p>
 						<Page3TextAreaWrapper>
-							<Page3TextArea {...register("about")} id="field-about"/>
+							<Page3TextArea {...register("about")} id="field-about" />
 							<Page3Counter>{aboutLength}</Page3Counter>
 						</Page3TextAreaWrapper>
 						{errors.about && <ErrorText>{errors.about.message}</ErrorText>}
 					</Stack>
 				</Page3Inner>
 				<Stack justify="between">
-					<Button variant="ghost" type="button" id="button-back" onClick={handlerPrev}>
+					<Button
+						variant="ghost"
+						type="button"
+						id="button-back"
+						onClick={handlerPrev}
+					>
             Назад
 					</Button>
-					<Button variant="solid" id="button-send">Готово</Button>
+					<Button variant="solid" id="button-send">
+            Готово
+					</Button>
 				</Stack>
+				<DevTool control={control} />
 			</Page3Wrapper>
 			<Modal />
 		</>

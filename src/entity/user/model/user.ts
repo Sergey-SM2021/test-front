@@ -35,14 +35,10 @@ const userSlice = createSlice({
 			state.secondaryData = payload.payload
 			return state
 		},
-		setAbout(state, payload: PayloadAction<string>) {
-			state.about = payload.payload
-			return state
-		},
 	},
 })
 
 export const {
-	actions: { setPrimaryInfo, setAbout, setPersonalData, setSecondaryData },
+	actions: { setPrimaryInfo, setPersonalData, setSecondaryData },
 	reducer,
 } = userSlice

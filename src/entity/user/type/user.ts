@@ -18,6 +18,6 @@ export interface IUser {
   secondaryData: {
     advantages: string[];
     checkbox: number[];
-    radio: number;
+    radio?: number;
   };
 }

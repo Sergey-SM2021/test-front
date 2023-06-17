@@ -24,18 +24,20 @@ const RadioBoxes = new Array(3).fill({
 	value: "field-checkbox-group-option-",
 })
 
-interface IForm extends Omit<IUser["secondaryData"], "advantages"> {
+interface IForm extends Omit<IUser["secondaryData"], "advantages" | "radio"> {
   advantages: { value: string; id: string }[];
+  radio: number
 }
 
 export const Page2 = () => {
 	const secondaryData = useAppSelector((state) => ({
-		...state.user.secondaryData,
+		...state.user?.secondaryData,
 		advantages: state.user.secondaryData.advantages.map((el) => ({
 			value: el,
 			id: Math.random.toString(),
 		})),
 	}))
+
 	const {
 		register,
 		handleSubmit,
@@ -106,8 +108,8 @@ export const Page2 = () => {
 								<AddIcon />
 							</Button>
 						</span>
-						{errors.checkbox ? (
-							<ErrorText>{JSON.stringify(errors.advantages)}</ErrorText>
+						{errors.advantages ? (
+							<ErrorText>{errors.advantages?.message}</ErrorText>
 						) : null}
 					</Stack>
 					<Stack vertical>
@@ -129,7 +131,7 @@ export const Page2 = () => {
 							))}
 						</ul>
 						{errors.checkbox ? (
-							<ErrorText>{JSON.stringify(errors.checkbox)}</ErrorText>
+							<ErrorText>{errors.checkbox.message}</ErrorText>
 						) : null}
 					</Stack>
 					<Stack vertical>
@@ -147,7 +149,7 @@ export const Page2 = () => {
 							))}
 						</ul>
 						{errors.radio ? (
-							<ErrorText>{JSON.stringify(errors.radio)}</ErrorText>
+							<ErrorText>{errors.radio.message}</ErrorText>
 						) : null}
 					</Stack>
 				</Stack>

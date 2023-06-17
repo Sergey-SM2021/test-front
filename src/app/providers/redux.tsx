@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { reducer as userReducer } from "entity/user/model/user"
+import { reducer as sendReducer } from "feature/send/model/send"
 import { PropsWithChildren } from "react"
 import { Provider, TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 
 export const store = configureStore({
 	reducer: {
 		user: userReducer,
+		send: sendReducer,
 	},
 })
 

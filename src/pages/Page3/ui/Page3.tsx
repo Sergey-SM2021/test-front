@@ -15,6 +15,8 @@ import { useStep } from "shared/hooks/useStep"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { validation } from "../utils/validation"
 import { ErrorText } from "shared/ui/ErrorText/ErrorText"
+import { Modal } from "feature/send/ui/Modal/Modal"
+import { sendData } from "feature/send/model/send"
 
 interface IForm {
   about: IUser["about"];
@@ -24,6 +26,7 @@ export const Page3 = () => {
 	const { handlerPrev } = useStep()
 	const dispatch = useAppDispatch()
 	const { about } = useAppSelector((state) => state.user)
+	const { user } = useAppSelector((state) => state)
 	const {
 		register,
 		handleSubmit,
@@ -38,28 +41,32 @@ export const Page3 = () => {
 
 	const aboutLength = watch("about").length
 
-	const onSubmit = (data: IForm) => {
-		dispatch(setAbout(data.about))
+	const onSubmit = async (data: IForm) => {
+		await dispatch(setAbout(data.about))
+		dispatch(sendData(user))
 	}
 
 	return (
-		<Page3Wrapper onSubmit={handleSubmit(onSubmit)}>
-			<Page3Inner>
-				<Stack vertical>
-					<p>About</p>
-					<Page3TextAreaWrapper>
-						<Page3TextArea {...register("about")} />
-						<Page3Counter>{aboutLength}</Page3Counter>
-					</Page3TextAreaWrapper>
-					{errors.about && <ErrorText>{errors.about.message}</ErrorText>}
+		<>
+			<Page3Wrapper onSubmit={handleSubmit(onSubmit)}>
+				<Page3Inner>
+					<Stack vertical>
+						<p>About</p>
+						<Page3TextAreaWrapper>
+							<Page3TextArea {...register("about")} />
+							<Page3Counter>{aboutLength}</Page3Counter>
+						</Page3TextAreaWrapper>
+						{errors.about && <ErrorText>{errors.about.message}</ErrorText>}
+					</Stack>
+				</Page3Inner>
+				<Stack justify="between">
+					<Button variant="ghost" type="button" onClick={handlerPrev}>
+            Назад
+					</Button>
+					<Button variant="solid">Готово</Button>
 				</Stack>
-			</Page3Inner>
-			<Stack justify="between">
-				<Button variant="ghost" type="button" onClick={handlerPrev}>
-          Назад
-				</Button>
-				<Button variant="solid">Готово</Button>
-			</Stack>
-		</Page3Wrapper>
+			</Page3Wrapper>
+			<Modal />
+		</>
 	)
 }

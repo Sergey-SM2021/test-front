@@ -1,12 +1,7 @@
 import { styled } from "styled-components"
 import { BaseStyle } from "../BaseStyle/BaseStyle"
 
-export const InputField = styled.input`
+export const InputField = styled.input<{ disabled?: boolean }>`
   ${BaseStyle}
-`
-
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  background-color: ${({ disabled }) => (disabled ? "#0000000a" : "#fff")};
 `

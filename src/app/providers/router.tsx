@@ -7,9 +7,8 @@ import {
 import { ProgressBar } from "widgets/stepWidget"
 import { Page1 } from "pages/Page1/Page1"
 import { Page2 } from "pages/Page2/ui/Page2"
-import { Page3 } from "pages/Page3/Page3"
+import { Page3 } from "pages/Page3/ui/Page3"
 import { Layout } from "shared/ui/Layout/Layout"
-import { StepControll } from "widgets/stepControll"
 import { PageWrapper } from "shared/ui/PageWrapper/PageWrapper.style"
 
 const router = createBrowserRouter([

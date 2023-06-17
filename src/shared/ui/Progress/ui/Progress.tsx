@@ -6,7 +6,7 @@ interface IStep {
   stepActive: number;
 }
 
-export const Step = ({ stepActive, steps }: IStep) => {
+export const Progress = ({ stepActive, steps }: IStep) => {
 	return (
 		<ProgressWrapper>
 			{new Array(steps - 1).fill(null).map((el, i) => (

@@ -9,6 +9,7 @@ export const MainPageHeader = styled.div`
   gap: 24px;
   border-bottom: gray 1px solid;
   padding-bottom: 24px;
+  flex-wrap: wrap;
 `
 
 export const HeaderAvatar = styled.div`
@@ -19,6 +20,7 @@ export const HeaderAvatar = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 `
 
 export const HeaderContent = styled.div`

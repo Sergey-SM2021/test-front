@@ -10,10 +10,11 @@ import { useOutsideClick } from "shared/hooks/useOutsideClick"
 interface ISelect extends PropsWithChildren {
   onChange: (string: string) => void;
   value: string;
+  id: string;
 }
 
 export const Select = (props: ISelect) => {
-	const { value, onChange, children } = props
+	const { value, onChange, children, id } = props
 
 	const [isOpen, setIsOpen] = useState(false)
 
@@ -30,7 +31,7 @@ export const Select = (props: ISelect) => {
 	useOutsideClick(ref, () => setIsOpen(false))
 
 	return (
-		<DropListWrapper ref={ref} onClick={handlerOpen}>
+		<DropListWrapper ref={ref} id={id} onClick={handlerOpen}>
 			{value ?? "Не выбрано"}
 			<DropListArrowWrapper>
 				<Vector />

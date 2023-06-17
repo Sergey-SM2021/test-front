@@ -29,7 +29,7 @@ export const ModalContent = ({ success }: IModal) => {
 				<h4>Форма успешно отправлена</h4>
 				<Allow />
 				<div>
-					<Button variant="solid" onClick={handlerHome}>
+					<Button variant="solid" onClick={handlerHome} id="button-to-main">
             На главную
 					</Button>
 				</div>
@@ -44,7 +44,7 @@ export const ModalContent = ({ success }: IModal) => {
 			</Stack>
 			{success ? <Allow /> : <NotAllow />}
 			<Stack justify="end" w={"100%"}>
-				<Button variant="solid" onClick={handlerClose}>
+				<Button id="button-close" variant="solid" onClick={handlerClose}>
           Закрыть
 				</Button>
 			</Stack>

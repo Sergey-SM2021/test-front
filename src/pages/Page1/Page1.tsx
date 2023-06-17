@@ -41,16 +41,19 @@ export const Page1 = () => {
 							label="Nickname"
 							error={errors.nickname?.message}
 							{...register("nickname")}
+							id="field-nickname"
 						/>
 						<Field
 							label="Name"
 							error={errors.name?.message}
 							{...register("name")}
+							id="field-name"
 						/>
 						<Field
 							label="Surename"
 							error={errors.surename?.message}
 							{...register("surename")}
+							id="field-sername"
 						/>
 						<Stack vertical>
 							<p>Sex</p>
@@ -58,9 +61,9 @@ export const Page1 = () => {
 								name="sex"
 								control={control}
 								render={({ field }) => (
-									<Select {...field}>
-										<OptionWrapper data-label={sex.man}>man</OptionWrapper>
-										<OptionWrapper data-label={sex.woman}>woman</OptionWrapper>
+									<Select {...field} id="field-sex">
+										<OptionWrapper id="field-sex-option-man" data-label={sex.man}>man</OptionWrapper>
+										<OptionWrapper id="field-sex-option-woman" data-label={sex.woman}>woman</OptionWrapper>
 									</Select>
 								)}
 							/>
@@ -69,8 +72,8 @@ export const Page1 = () => {
 				</Page1Inner>
 			</Stack>
 			<Stack justify="between">
-				<Button variant="ghost" type="button" onClick={handlerPrev}>Назад</Button>
-				<Button variant="solid">Вперёд</Button>
+				<Button id="button-back" variant="ghost" type="button" onClick={handlerPrev}>Назад</Button>
+				<Button id="button-next" variant="solid">Вперёд</Button>
 			</Stack>
 		</Page1Wrapper>
 	)

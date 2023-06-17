@@ -53,17 +53,17 @@ export const Page3 = () => {
 					<Stack vertical>
 						<p>About</p>
 						<Page3TextAreaWrapper>
-							<Page3TextArea {...register("about")} />
+							<Page3TextArea {...register("about")} id="field-about"/>
 							<Page3Counter>{aboutLength}</Page3Counter>
 						</Page3TextAreaWrapper>
 						{errors.about && <ErrorText>{errors.about.message}</ErrorText>}
 					</Stack>
 				</Page3Inner>
 				<Stack justify="between">
-					<Button variant="ghost" type="button" onClick={handlerPrev}>
+					<Button variant="ghost" type="button" id="button-back" onClick={handlerPrev}>
             Назад
 					</Button>
-					<Button variant="solid">Готово</Button>
+					<Button variant="solid" id="button-send">Готово</Button>
 				</Stack>
 			</Page3Wrapper>
 			<Modal />

@@ -20,6 +20,11 @@ import { IUser } from "entity/user/type/user"
 import { setPrimaryInfo } from "entity/user/model/user"
 import { useState } from "react"
 import Edit from "../assets/Edit.svg"
+import {
+	onPhoneInput,
+	onPhoneKeyDown,
+	onPhonePaste,
+} from "shared/utils/phoneMask"
 
 const links = [
 	{ name: "Telegram", id: "0" },
@@ -79,7 +84,15 @@ export const MainPage = () => {
 			<MainPageBody>
 				<BodyFields>
 					<Stack vertical>
-						<InputField {...register("phone")} disabled={isDisabled} />
+						<InputField
+							ref={register("phone").ref}
+							onBlur={register("phone").onBlur}
+							name={register("phone").name}
+							disabled={isDisabled}
+							onKeyDown={onPhoneKeyDown}
+							onInput={onPhoneInput}
+							onPaste={onPhonePaste}
+						/>
 					</Stack>
 					<Stack vertical>
 						<InputField {...register("mail")} disabled={isDisabled} />

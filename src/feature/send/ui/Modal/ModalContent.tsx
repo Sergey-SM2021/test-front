@@ -17,6 +17,7 @@ export const ModalContent = ({ success }: IModal) => {
 
 	const handlerHome = () => {
 		nav("/")
+		dispatch(close())
 	}
 
 	const handlerClose = () => {
@@ -36,6 +37,7 @@ export const ModalContent = ({ success }: IModal) => {
 			</Stack>
 		)
 	}
+	
 	return (
 		<Stack vertical space="xl" align="center">
 			<Stack justify="between" w={"100%"}>

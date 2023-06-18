@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack serve",
+    "start": "webpack serve --env mode=development",
     "eslint": "eslint --fix src"
   },
   "devDependencies": {
@@ -18,13 +18,13 @@
     "html-webpack-plugin": "^5.5.3",
     "webpack": "^5.86.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^4.15.1",
+    "@types/react": "^18.2.11",
+    "@types/react-dom": "^18.2.4"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
     "@reduxjs/toolkit": "^1.9.5",
-    "@types/react": "^18.2.11",
-    "@types/react-dom": "^18.2.4",
     "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

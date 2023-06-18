@@ -19,15 +19,12 @@ import { Stack } from "shared/ui/Stack/Stack.style"
 import { InputField } from "shared/ui/Input/Input.style"
 import { IUser } from "entity/user/type/user"
 import { setPrimaryInfo } from "entity/user/model/user"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Edit from "../assets/Edit.svg"
-import {
-	onPhoneInput,
-	onPhoneKeyDown,
-	onPhonePaste,
-} from "shared/utils/phoneMask"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { validation } from "../utils/validation"
+import { phoneMask } from "shared/utils/phoneMask"
+import { onPhoneInput } from "../utils/onPhoneInput"
 
 const links = [
 	{ name: "Telegram", id: "0" },
@@ -45,7 +42,7 @@ export const MainPage = () => {
 
 	const { name, surename } = useAppSelector((state) => state.user.personalData)
 
-	const { register, handleSubmit } = useForm<IUser["primaryInfo"]>({
+	const { register, handleSubmit, setValue } = useForm<IUser["primaryInfo"]>({
 		defaultValues: { mail, phone },
 		resolver: yupResolver(validation),
 	})
@@ -60,6 +57,10 @@ export const MainPage = () => {
 	const handlerEdit = () => {
 		setIsDisabled(false)
 	}
+
+	useEffect(() => {
+		setValue("phone", onPhoneInput(phone))
+	}, [])
 
 	return (
 		<MainPageWrapper onSubmit={handleSubmit(onSubmit)}>
@@ -91,9 +92,7 @@ export const MainPage = () => {
 							onBlur={register("phone").onBlur}
 							name={register("phone").name}
 							disabled={isDisabled}
-							onKeyDown={onPhoneKeyDown}
-							onInput={onPhoneInput}
-							onPaste={onPhonePaste}
+							{...phoneMask}
 						/>
 					</Stack>
 					<Stack vertical>

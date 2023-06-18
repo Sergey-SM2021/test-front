@@ -3,7 +3,7 @@ export const getInputNumbersValue = function (input) {
 	return input.value.replace(/\D/g, "")
 }
 
-export const onPhonePaste = function (e) {
+const onPaste = function (e) {
 	const input = e.target,
 		inputNumbersValue = getInputNumbersValue(input)
 	const pasted = e.clipboardData || window.clipboardData
@@ -18,14 +18,14 @@ export const onPhonePaste = function (e) {
 	}
 }
 
-export const onPhoneInput = function (e) {
+const onInput = function (e) {
 	let input = e.target,
 		inputNumbersValue = getInputNumbersValue(input),
 		selectionStart = input.selectionStart,
 		formattedInputValue = ""
 
 	if (!inputNumbersValue) {
-		return input.value = ""
+		return (input.value = "")
 	}
 
 	if (input.value.length != selectionStart) {
@@ -38,8 +38,9 @@ export const onPhoneInput = function (e) {
 	}
 
 	if (["7", "8", "9"].indexOf(inputNumbersValue[0]) > -1) {
-		if (inputNumbersValue[0] == "9") inputNumbersValue = "7" + inputNumbersValue
-		const firstSymbols = (inputNumbersValue[0] == "8") ? "8" : "+7"
+		if (inputNumbersValue[0] == "9")
+			inputNumbersValue = "7" + inputNumbersValue
+		const firstSymbols = inputNumbersValue[0] == "8" ? "8" : "+7"
 		formattedInputValue = input.value = firstSymbols + " "
 		if (inputNumbersValue.length > 1) {
 			formattedInputValue += "(" + inputNumbersValue.substring(1, 4)
@@ -59,10 +60,12 @@ export const onPhoneInput = function (e) {
 	input.value = formattedInputValue
 }
 
-export const onPhoneKeyDown = function (e) {
+const onKeyDown = function (e) {
 	// Clear input after remove last symbol
 	const inputValue = e.target.value.replace(/\D/g, "")
 	if (e.keyCode == 8 && inputValue.length == 1) {
 		e.target.value = ""
 	}
 }
+
+export const phoneMask = { onPaste, onKeyDown, onInput }

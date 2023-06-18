@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom"
-import { Button } from "../../../shared/ui/Button/Button.style"
+import { Button } from "shared/ui/Button/Button.style"
 import Folder from "../assets/Folder.svg"
 import {
 	BodyFields,
+	EditWrapper,
 	HeaderAvatar,
 	HeaderContent,
 	HeaderLink,
@@ -25,6 +26,8 @@ import {
 	onPhoneKeyDown,
 	onPhonePaste,
 } from "shared/utils/phoneMask"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { validation } from "../utils/validation"
 
 const links = [
 	{ name: "Telegram", id: "0" },
@@ -44,16 +47,14 @@ export const MainPage = () => {
 
 	const { register, handleSubmit } = useForm<IUser["primaryInfo"]>({
 		defaultValues: { mail, phone },
+		resolver: yupResolver(validation),
 	})
 
 	const nav = useNavigate()
 
-	const handlerStart = () => {
-		nav("/step/1")
-	}
-
 	const onSubmit = (values: IUser["primaryInfo"]) => {
 		dispatch(setPrimaryInfo(values))
+		nav("/step/1")
 	}
 
 	const handlerEdit = () => {
@@ -97,12 +98,12 @@ export const MainPage = () => {
 					<Stack vertical>
 						<InputField {...register("mail")} disabled={isDisabled} />
 					</Stack>
-					<Stack align="center" onClick={handlerEdit}>
+					<EditWrapper align="center" onClick={handlerEdit}>
 						<Edit />
 						<p>Редактировать</p>
-					</Stack>
+					</EditWrapper>
 				</BodyFields>
-				<Button variant="solid" onClick={handlerStart} id="button-start">
+				<Button variant="solid" id="button-start">
           Начать
 				</Button>
 			</MainPageBody>

@@ -89,10 +89,13 @@ export const Page2 = () => {
 							{fields.map((el, i) => (
 								<Page2AdvantagesItem key={el.id}>
 									<InputField
-										id={el.id}
+										id={`field-advantages-${i + 1}`}
 										{...register(`advantages.${i}.value`)}
 									/>
-									<div onClick={() => handlerRemove(i)}>
+									<div
+										onClick={() => handlerRemove(i)}
+										id={`button-remove-${i + 1}`}
+									>
 										<Remove />
 									</div>
 								</Page2AdvantagesItem>
@@ -124,6 +127,7 @@ export const Page2 = () => {
 											{...register("checkbox")}
 											type="checkbox"
 											value={i + 1}
+											id={`field-checkbox-group-option-${i + 1}`}
 										/>
 										<label htmlFor={`field-checkbox-group-option-${i + 1}`}>
 											{i + 1}
@@ -141,9 +145,14 @@ export const Page2 = () => {
 						<ul>
 							{RadioBoxes.map((el, i) => (
 								<li key={i}>
-									<Stack key={el.id}>
-										<input {...register("radio")} type="radio" value={i + 1} />
-										<label htmlFor={`field-checkbox-group-option-${i + 1}`}>
+									<Stack>
+										<input
+											{...register("radio")}
+											type="radio"
+											value={i + 1}
+											id={`field-radio-group-option-${i + 1}`}
+										/>
+										<label htmlFor={`field-radio-group-option-${i + 1}`}>
 											{i + 1}
 										</label>
 									</Stack>
@@ -157,10 +166,17 @@ export const Page2 = () => {
 				</Stack>
 			</Page2Inner>
 			<Stack justify="between">
-				<Button variant="ghost" type="button" onClick={handlerPrev}>
+				<Button
+					variant="ghost"
+					type="button"
+					id="button-back"
+					onClick={handlerPrev}
+				>
           Назад
 				</Button>
-				<Button variant="solid">Вперёд</Button>
+				<Button variant="solid" id="button-next">
+          Вперёд
+				</Button>
 			</Stack>
 		</Page2Wrapper>
 	)

@@ -9,7 +9,6 @@ import {
 import { useForm } from "react-hook-form"
 import { IUser } from "entity/user/type/user"
 import { useAppDispatch, useAppSelector } from "app/providers/redux"
-import { setAbout } from "entity/user/model/user"
 import { Button } from "shared/ui/Button/Button.style"
 import { useStep } from "shared/hooks/useStep"
 import { yupResolver } from "@hookform/resolvers/yup"

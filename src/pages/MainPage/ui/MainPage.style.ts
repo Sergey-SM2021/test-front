@@ -1,7 +1,14 @@
+import { Stack } from "shared/ui/Stack/Stack.style"
 import { styled } from "styled-components"
 
 export const MainPageWrapper = styled.form`
   padding: 24px;
+`
+
+export const EditWrapper = styled(Stack)`
+	&:hover{
+		cursor: pointer;
+	}
 `
 
 export const MainPageHeader = styled.div`

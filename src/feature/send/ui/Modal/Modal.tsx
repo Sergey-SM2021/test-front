@@ -5,6 +5,7 @@ import { useOutsideClick } from "shared/hooks/useOutsideClick"
 import { useRef } from "react"
 import { close } from "feature/send/model/send"
 import { useDispatch } from "react-redux"
+import { Loading } from "shared/ui/Loading/Loading"
 
 export const Modal = () => {
 	const { isOpen, error, isLoading } = useAppSelector(
@@ -26,6 +27,12 @@ export const Modal = () => {
 				</ModalWrapper>
 			</Shadow>
 		)
+	}
+
+	if(isLoading){
+		return <Shadow>
+			<Loading />
+		</Shadow>
 	}
 
 	return null

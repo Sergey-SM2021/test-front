@@ -39,6 +39,7 @@ export const Page1 = () => {
 					<Stack vertical space="lg">
 						<Field
 							label="Nickname"
+							placeholder="Звёздный лорд"
 							error={errors.nickname?.message}
 							{...register("nickname")}
 							id="field-nickname"

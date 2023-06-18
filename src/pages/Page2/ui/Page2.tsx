@@ -1,6 +1,6 @@
 import { useFieldArray, useForm } from "react-hook-form"
 import { Button } from "shared/ui/Button/Button.style"
-import { Page2Inner, Page2Wrapper } from "../ui/Page2.style"
+import { Page2Actions, Page2Inner, Page2Wrapper } from "../ui/Page2.style"
 import AddIcon from "../assets/Vector.svg"
 import Remove from "../assets/remove.svg"
 import { Page2AdvantagesItem } from "./Page2.style"
@@ -165,7 +165,7 @@ export const Page2 = () => {
 					</Stack>
 				</Stack>
 			</Page2Inner>
-			<Stack justify="between">
+			<Page2Actions>
 				<Button
 					variant="ghost"
 					type="button"
@@ -177,7 +177,7 @@ export const Page2 = () => {
 				<Button variant="solid" id="button-next">
           Вперёд
 				</Button>
-			</Stack>
+			</Page2Actions>
 		</Page2Wrapper>
 	)
 }

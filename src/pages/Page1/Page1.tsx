@@ -1,5 +1,5 @@
 import { Controller, useForm } from "react-hook-form"
-import { Page1Inner, Page1Wrapper } from "./Page1.style"
+import { Page1Actions, Page1Inner, Page1Wrapper } from "./Page1.style"
 import { setPersonalData } from "entity/user/model/user"
 import { IUser, sex } from "entity/user/type/user"
 import { useAppDispatch, useAppSelector } from "app/providers/redux"
@@ -71,10 +71,10 @@ export const Page1 = () => {
 					</Stack>
 				</Page1Inner>
 			</Stack>
-			<Stack justify="between">
+			<Page1Actions>
 				<Button id="button-back" variant="ghost" type="button" onClick={handlerPrev}>Назад</Button>
 				<Button id="button-next" variant="solid">Вперёд</Button>
-			</Stack>
+			</Page1Actions>
 		</Page1Wrapper>
 	)
 }

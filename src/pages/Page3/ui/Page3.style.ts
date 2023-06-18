@@ -1,3 +1,4 @@
+import { Stack } from "shared/ui/Stack/Stack.style"
 import { TextArea } from "shared/ui/TextArea.style"
 import { styled } from "styled-components"
 
@@ -23,4 +24,13 @@ export const Page3TextArea = styled(TextArea)`
   box-sizing: border-box;
   height: 84px;
   resize: none;
+`
+
+export const Page3Actions = styled(Stack)`
+  justify-content: stretch;
+  flex-direction: column-reverse;
+  @media (min-width: 720px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `

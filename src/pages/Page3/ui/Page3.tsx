@@ -1,5 +1,6 @@
 import { Stack } from "shared/ui/Stack/Stack.style"
 import {
+	Page3Actions,
 	Page3Counter,
 	Page3Inner,
 	Page3TextArea,
@@ -16,7 +17,6 @@ import { validation } from "../utils/validation"
 import { ErrorText } from "shared/ui/ErrorText/ErrorText"
 import { Modal } from "feature/send/ui/Modal/Modal"
 import { sendData } from "feature/send/model/send"
-import { DevTool } from "@hookform/devtools"
 
 interface IForm {
   about: IUser["about"];
@@ -31,7 +31,6 @@ export const Page3 = () => {
 		register,
 		handleSubmit,
 		watch,
-		control,
 		formState: { errors },
 	} = useForm<IForm>({
 		defaultValues: {
@@ -59,7 +58,7 @@ export const Page3 = () => {
 						{errors.about && <ErrorText>{errors.about.message}</ErrorText>}
 					</Stack>
 				</Page3Inner>
-				<Stack justify="between">
+				<Page3Actions>
 					<Button
 						variant="ghost"
 						type="button"
@@ -71,8 +70,7 @@ export const Page3 = () => {
 					<Button variant="solid" id="button-send">
             Готово
 					</Button>
-				</Stack>
-				<DevTool control={control} />
+				</Page3Actions>
 			</Page3Wrapper>
 			<Modal />
 		</>

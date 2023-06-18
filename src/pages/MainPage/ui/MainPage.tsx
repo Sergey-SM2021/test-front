@@ -86,6 +86,7 @@ export const MainPage = () => {
 				<BodyFields>
 					<Stack vertical>
 						<InputField
+							type="tel"
 							ref={register("phone").ref}
 							onBlur={register("phone").onBlur}
 							name={register("phone").name}

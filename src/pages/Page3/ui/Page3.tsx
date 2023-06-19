@@ -17,6 +17,7 @@ import { validation } from "../utils/validation"
 import { ErrorText } from "shared/ui/ErrorText/ErrorText"
 import { Modal } from "feature/send/ui/Modal/Modal"
 import { sendData } from "feature/send/model/send"
+import { setAbout } from "entity/user/model/user"
 
 interface IForm {
   about: IUser["about"];
@@ -42,6 +43,7 @@ export const Page3 = () => {
 	const aboutLength = watch("about").length
 
 	const onSubmit = async (data: IForm) => {
+		dispatch(setAbout(data.about))
 		await dispatch(sendData({ ...user, about: data.about }))
 	}
 
